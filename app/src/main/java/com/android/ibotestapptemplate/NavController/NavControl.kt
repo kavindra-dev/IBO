@@ -26,25 +26,24 @@ fun NavControl(navController: NavHostController){
         composable(
             "detail/{title}/{image}/{synopsis}"
 
-        )
+        ){}
         composable(
             arguments = listOf(navArgument("title") { type = NavType.StringType },
             navArgument("image") { type = NavType.StringType },
             navArgument("synopsis") { type = NavType.StringType }
 
-        )
-        )
-
-        { backStackEntry ->
-            MovieDetailScreen(
-                title = backStackEntry.arguments?.getString("title") ?: "",
-                image = backStackEntry.arguments?.getString("image") ?: "",
-                synopsis = backStackEntry.arguments?.getString("synopsis") ?: ""
-            )
+        )) { backStackEntry ->
+                MovieDetailScreen(
+                    title = backStackEntry.arguments?.getString("title") ?: "",
+                    image = backStackEntry.arguments?.getString("image") ?: "",
+                    synopsis = backStackEntry.arguments?.getString("synopsis") ?: ""
+                )
+            }
         }
+
     }
 
-}
+
 
 @Composable
 fun MovieDetailScreen(title: String, image: String, synopsis: String) {
