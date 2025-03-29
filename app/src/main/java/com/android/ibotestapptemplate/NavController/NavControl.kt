@@ -24,19 +24,19 @@ fun NavControl(navController: NavHostController){
     NavHost(navController, startDestination = "grid") {
         composable("grid") { MovieGridScreen(navController) }
         composable(
-            "detail/{title}/{image}/{synopsis}"
+            "detail/{title}/{image}/{description}"
 
         ){}
         composable(
             arguments = listOf(navArgument("title") { type = NavType.StringType },
             navArgument("image") { type = NavType.StringType },
-            navArgument("synopsis") { type = NavType.StringType }
+            navArgument("description") { type = NavType.StringType }
 
         )) { backStackEntry ->
                 MovieDetailScreen(
                     title = backStackEntry.arguments?.getString("title") ?: "",
                     image = backStackEntry.arguments?.getString("image") ?: "",
-                    synopsis = backStackEntry.arguments?.getString("synopsis") ?: ""
+                    description = backStackEntry.arguments?.getString("description") ?: ""
                 )
             }
         }
@@ -46,7 +46,19 @@ fun NavControl(navController: NavHostController){
 
 
 @Composable
-fun MovieDetailScreen(title: String, image: String, synopsis: String) {
+fun MovieDetailScreen(title: String, image: String, description: String) {
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Image(
+            painter = rememberAsyncImagePainter(image),
+            contentDescription = title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.height(250.dp).fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = title, style = MaterialTheme.typography.headlineMedium)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = description, style = MaterialTheme.typography.bodyMedium)
+    }
 
 }
 
