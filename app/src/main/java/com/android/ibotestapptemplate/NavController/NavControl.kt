@@ -63,7 +63,7 @@ fun MovieDetailScreen(title: String, image: String, description: String) {
 }
 
 @Composable
-fun MovieGridScreen(navController: NavHostController, ) {
+fun MovieGridScreen(navController: NavHostController, viewModel: MovieViewModel ) {
 
     val movies by viewModel.movies.collectAsState()
     LazyVerticalGrid(
